@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
+        integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+    <style>
+        body {
+            color: whitesmoke;
+            font-size: 50px;
+            font-weight: 700;
+            /* font-family: 'Recursive', sans-serif; */
+            font-family: 'Sacramento', cursive;
+            text-shadow: 2px 2px 5px rgb(0, 67, 112);
+            letter-spacing: 9px;
+            background: #FC5C7D;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #6A82FB, #FC5C7D);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        div.container {
+            /* padding: 75px; */
+            /* height: 100vh; */
+            padding-bottom: 0;
+            padding-top: 20px;
+        }
+
+        div.card-group {
+            height: 100px;
+            width: 450px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        div.card {
+            border: none;
+            /* border-radius: 5px solid black !important; */
+            justify-content: center;
+            text-align: center;
+
+            margin: 10px;
+            /* border-radius: 15px !important; */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.5 ease-in-out;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            font-size: 52px;
+        }
+
+        /* div.card-group div.blank-css {
+            background-color: #f75d81 !important;
+        } */
+        .blank {
+            /* border: 2px solid red !important;
+            box-shadow: inset 0px 0px 1px 1px #af005d !important;
+            box-shadow: inset 0px 0px 8px 8px #ff87c7 !important; */
+        }
+
+        div.number {
+            background: #2193b0;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .correct {
+            box-shadow: inset 0px 0px 1px 1px #af005d !important;
+            box-shadow: inset 0px 0px 8px 8px #ff87c7 !important;
+        }
+
+        /* div.time,
+        div.progress,
+        div.move {
+            font-family: 'Recursive', sans-serif;
+            font-weight: 400;
+        } */
+
+        .time span {
+            padding: 0;
+            letter-spacing: 0;
+        }
+
+        div.time span.badge {
+            font-size: 50px;
+        }
+
+        div.time span.time-sec {
+            font-size: 40px;
+        }
+
+        div.info-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        div.progress {
+            align-self: center;
+
+        }
+
+        div.progress,
+        div.progress-bar {
+            width: 250px;
+            height: 30px;
+        }
+
+        #reset {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 90px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            height: min-content;
+            align-self: center;
+        }
+
+        span.move-text {
+            font-size: 40px;
+        }
+
+        /* CSS FOR MODAL FOR LEADERBOARD */
+        div.modal {
+            display: inline-flex;
+            justify-content: center;
+            background: rgb(103 103 103 / 64%);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        div.modal-dialog {
+            align-self: center;
+        }
+        div.card{
+            float: left;
+        }
+        div.custom-container div.modal{
+            display: none;
+        }
+        button.leaderboard{
+            width: 100%;
+        }
+        table{
+            font-size: 15px;
+        }
+        /* FONT OF TIME AND ORIGINAL PIC */
+        .time,.custom-container,.modal-header .modal-title,button.original-pic{
+            font-family: "Poppins", sans-serif;
+            text-shadow: none;
+        }
+
+        @media only screen and (max-width:600px){
+            div.card-group{
+                width: 100%;
+                margin: 0;
+                height: 80px;
+            }
+            div.card {
+                width: 20vw;
+                height: 20vw;
+                margin: 5px;
+            }
+        }
+        @media only screen and (max-width:350px){
+            div.card-group{
+                width: 100%;
+                margin: 0;
+                height: 60px;
+            }
+            div.card {
+                width: 20vw;
+                height: 20vw;
+                margin: 3px;
+            }
+        }
+        @media only screen and (max-width:450px){
+            div.modal-body img{
+                width: 90vw !important;
+                height: 90vw !important;
+            }
+        }
+    </style>
+    <script>
+        var moves = 0;
+        function checkMovement(blankNo) {
+            //adding css to blank cell and numbered cell
+            $("#Cell" + blankNo).removeClass("number");
+            $("#Cell" + blankNo).addClass("blank-css");
+
+            //checking numbers placed at right position
+            // var count is to check no of correct position to show progrees bar
+            var count = 0
+            for (var i = 1; i <= 16; i++) {
+                if ($("#Cell" + i).text() == i) {
+                    $("#Cell" + i).addClass("correct");
+                    count++;
+                }
+                else
+                    $("#Cell" + i).removeClass("correct");
+            }
+            var percent = (count / 15) * 100;
+            $(".progress-bar").attr("style", 'width:' + percent + '%');
+
+
+
+            var up = 0, left = 0, right = 0, down = 0, flag = 0;//flag is temp var to check if  left/right movements r possible or not
+            if (blankNo - 4 > 0)
+                up = blankNo - 4;
+            if (blankNo + 4 <= 4 * 4)
+                down = blankNo + 4;
+            for (var i = 1; i <= 4; i++) {
+                if (blankNo == i * 4 + 1)
+                    flag = 1;
+            }
+            if (flag != 1)
+                left = blankNo - 1;
+            flag = 0;
+            for (var i = 1; i <= 4; i++) {
+                if (blankNo == i * 4)
+                    flag = 1;
+            }
+            // if flag is not equal to 1 then movement is possile in right direciton
+            if (flag != 1)
+                right = blankNo + 1;
+            flag = 0;
+
+            console.log(blankNo);
+            $("#Cell" + blankNo).addClass('blank');
+
+
+            $("#Cell" + up).attr("onclick", "swap(" + blankNo + "," + up + ")");
+            $("#Cell" + right).attr("onclick", "swap(" + blankNo + "," + right + ")");
+            $("#Cell" + down).attr("onclick", "swap(" + blankNo + "," + down + ")");
+            $("#Cell" + left).attr("onclick", "swap(" + blankNo + "," + left + ")");
+        }
+        function swap(a, b) {
+            // a is blank and b has content
+            moves++;
+            //removing onclick attribute
+            $("#Cell" + (a + 4)).removeAttr("onclick");
+            $("#Cell" + (a - 4)).removeAttr("onclick");
+            $("#Cell" + (a + 1)).removeAttr("onclick");
+            $("#Cell" + (a - 1)).removeAttr("onclick");
+
+
+            //swaping values
+            // var temp = $("#Cell" + b).text();
+            // $("#Cell" + b).text("");
+            // $("#Cell" + a).text(temp);
+            var temp = $("#Cell" + b +" img").attr("src");
+            var temp1 = $("#Cell" + a+" img").attr("src");
+            console.log(temp);
+            console.log(temp1);
+            $("#Cell" + b +" img").attr("src",temp1);
+            $("#Cell" + a +" img").attr("src",temp);
+
+            $("#Cell" + a).removeClass('blank');
+
+            // ADD AND REMOVE STYLE(WIDTH AND HEIGTH 100%)
+            $("#Cell" + a +" img").removeAttr("style");
+            $("#Cell" + b +" img").attr("style","width:100%;height:100%;");
+
+            //adding css to blank cell and numbered cell
+            // $("#Cell" + a).removeClass("blank-css");
+            // $("#Cell" + a).addClass("number");
+            $(".move-step").text(moves);
+            checkMovement(b);
+        }
+        function showInitialPuzzle() { }
+
+        //TIMER
+        var time = 0
+        setInterval(function timer() {
+            $(".badge").text(time++);
+        }, 1000);
+
+        // COOKIE FOR LEADERBOARD
+        // function addUser() {
+        //     var user = $("#username").val();
+        //     var date_var = new Date();
+        //     var date = date_var.getDate();
+        //     var month = date_var.getMonth();
+        //     var hrs = date_var.getHours();
+        //     var min = date_var.getMinutes();
+        //     var sec = date_var.getSeconds();
+        //     // var temp = user+date+month+hrs+min+sec;
+        //     var score = 0;
+        //     var dateTime = [date, month, hrs, min, sec];
+        //     data = JSON.parse(Cookies.get('halloffame'));
+        //     if (Array.isArray(data) && !(data.length))
+        //         var data = [];
+        //     data.push({
+        //         name: user,
+        //         score: '0',
+        //         CurrentTime: dateTime 
+        //     })
+        //     data = JSON.stringify(data);
+        //     Cookies.set('halloffame',data);
+        //     $(".custom-container-1 .modal").css("display","none");
+        // }
+        // function showLeader(){
+        //     $(".custom-container .modal").css("display","block");
+        //     // console.log(Cookies.get('halloffame'));
+        //     var obj = JSON.parse(Cookies.get('halloffame'));
+        //     console.log(obj);
+        //     for (var i = 0; i < obj.length; i++) {
+        //         $("tbody ").append('<tr></tr>');
+        //         $("tbody tr:last-child").append('<th>'+obj[i].name+'</th>');
+        //         $("tbody tr:last-child").append('<th>'+obj[i].score+'</th>');
+        //         var properDate = obj[i].CurrentTime[0]+'/'+obj[i].CurrentTime[1]+'  '+obj[i].CurrentTime[2]+':'+obj[i].CurrentTime[3]+':'+obj[i].CurrentTime[4];
+        //         $("tbody tr:last-child").append('<th>'+properDate+'</th>');
+        //     }
+        //     // var NameUser = obj[0].name;
+        //     console.log(obj[0].time);
+        //     // $(".modal-body h4").text(NameUser);
+        // }
+        
+
+        // SHOW ORIGINAL PIC
+        function show_pic(){
+            $(".custom-container .modal").css("display","block");
+        }
+        function close_original_pic(){
+            $(".custom-container .modal").css("display","none");
+        }
+
+
+        $(document).ready(function () {
+            var x = document.getElementsByClassName("card");
+            $(x).addClass("red");
+
+
+            // creating 2d array
+            var boxSet = new Array(4);
+            for (i = 0; i < 4; i++)
+                boxSet[i] = new Array(4);
+            var k = 1;
+            for (var i = 0; i < 4; i++) {
+                $(".container").append('<div class="card-group" id=row' + (i + 1) + '></div>');
+                for (var j = 0; j < 4; j++) {
+                    boxSet[i][j] = k;
+                    $("#row" + (i + 1)).append('<div class="card number" id=Cell' + k + '>');
+                    k += 1;
+                }
+            }
+            boxSet[3][3] = 0;
+
+
+            //to shuffle array
+            for (i = 0; i < 4; i++) {
+                for (j = 0; j < 4; j++) {
+                    var random1 = Math.floor(Math.random() * 4);
+                    var random2 = Math.floor(Math.random() * 4);
+                    var temp = boxSet[i][j];
+                    boxSet[i][j] = boxSet[random1][random2];
+                    boxSet[random1][random2] = temp;
+                }
+            }
+
+
+            //print array in html
+            showInitialPuzzle();
+            function showInitialPuzzle() {
+                k = 1;
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 0; j < 4; j++) {
+
+                        if (boxSet[i][j] != 0)
+                            $("#Cell" + k).append('<img src="image/'+boxSet[i][j]+'.jpg">');
+                        else
+                            $("#Cell" + k).append('<img src="image/blank.jpg" style="width:100%;height:100%;">');
+                        k++;
+                    }
+                }
+            }
+
+
+
+            // Searching blank
+            k = 1;
+            for (var i = 0; i < 4; i++) {
+                for (var j = 0; j < 4; j++) {
+                    if (boxSet[i][j] == 0)
+                        var blank = k;
+                    k++;
+                }
+            }
+            checkMovement(blank);
+
+            //     function hello(Cellid) {
+            //         if (Cellid == $("#Cell" + Cellid).text())
+            //             $("#Cell" + Cellid).css("color", "red");
+            //     }
+        })
+    </script>
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <!-- <div class="custom-container-1">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                          <label for="name" class="form-label">Name</label>
+                          <input type="text" class="form-control" placeholder="Enter Your Name..." id="username" aria-describedby="emailHelp">
+                        </div>
+                      </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" onclick="addUser()">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div> -->
+
+
+      
+
+
+
+
+    <div class="container">
+        <div class="info-container">
+            <div class="time" style="display: inline-block;">
+                <span class="time-text">Time:</span>
+                <span class="badge badge-info"></span>
+                <span class="time-sec">s</span>
+            </div>
+            <!-- <div class="move" style="display: inline-block;">
+                <span class="move-text">Moves:</span>
+                <span class="move-step"></span>
+            </div> -->
+            <!-- <div class="progress" style="display: inline-block;">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                    style="width:20%">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" id="reset" onclick="temp()">Reset</button> -->
+        </div>
+
+        <!-- <button type="button" class="btn btn-info leaderboard" onclick="showLeader()">LEADERBOARD</button> -->
+        <button type="button" class="btn btn-info original-pic" onclick="show_pic()" style="width: 100%;">Show Original Pic</button>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <!-- <div class="custom-container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content" style="width: max-content;">
+                <div class="modal-header">
+                  <h5 class="modal-title">HALL OF FAME</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Score</th>
+                              <th>Played At</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div> -->
+
+    <!-- ORIGINAL PIC -->
+    <div class="custom-container">
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content" style="width: min-content;">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="color: black;">NAME OF PIC</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="close_original_pic()" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="image/original_pic.jpeg" alt="" style="width: 50vh; height: 50vh;">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" onclick="close_original_pic()" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+
+    <!-- <div class="custom-container">
+        <button type="button" class="btn btnprimary">Primary</button>
+    </div> -->
+
+
+
+
+</body>
+
+</html>

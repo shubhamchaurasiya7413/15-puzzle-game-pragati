@@ -1,0 +1,7 @@
+Create complete game with 3 levels i.e. Easy, Medium, Hard
+Play song on every puzzle that will be unpausible so that pragati doesn't gets bored and song should match pic(like cute si pic k liye cute wala song,party pic k liye party song play ho)
+IMPORTANT: UX AND UI should be PERFECT
+Proper display of time and no. of moves to be displayed
+Every time pragati open the page there should be a new puzzle to solve i.e. puzzle game should not contain only one image
+Create a leaderboard to see score when completed the puzzle and try to send that data back
+There should be option for next puzzle if she doesn't like current puzzle
